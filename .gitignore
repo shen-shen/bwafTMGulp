@@ -46,6 +46,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-#libs
-./bower_components/*
-./node_modules/*
+# libs
+# ./bower_components/*
+# ./node_modules/*
