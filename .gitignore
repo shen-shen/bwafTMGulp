@@ -47,5 +47,5 @@ Temporary Items
 .apdisk
 
 #libs
-./bower_components/*
-./node_modules/*
+#./bower_components/*
+#./node_modules/*
