@@ -12,7 +12,7 @@
     // 'BwafTM.pages.ui',
     // 'BwafTM.pages.components',
     // 'BwafTM.pages.form',
-    // 'BwafTM.pages.tables',
+    'BwafTM.pages.tables',
     'BwafTM.pages.charts'
     // 'BwafTM.pages.maps',
     // 'BwafTM.pages.profile',

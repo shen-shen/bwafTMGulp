@@ -6,10 +6,10 @@
   'use strict';
 
   angular.module('BwafTM.pages.charts', [
-      'BwafTM.pages.charts.amCharts'
-      // 'BwafTM.pages.charts.chartJs',
-      // 'BwafTM.pages.charts.chartist',
-      // 'BwafTM.pages.charts.morris'
+      'BwafTM.pages.charts.amCharts',
+      'BwafTM.pages.charts.chartJs',
+      'BwafTM.pages.charts.chartist',
+      'BwafTM.pages.charts.morris'
   ])
       .config(routeConfig);
 

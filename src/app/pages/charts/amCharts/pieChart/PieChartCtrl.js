@@ -24,7 +24,10 @@
       legend: {
         position: 'right',
         marginRight: 100,
-        autoMargins: false,
+        autoMargins: true,
+        color: '#000000',
+        clickMarker: handleLegendClick,
+        clickLabel: handleLegendClick
       },
       innerRadius: '40%',
       defs: {
@@ -52,16 +55,76 @@
           }
         ]
       },
+  //       "type": "pie",
+  // "startDuration": 0,
+  //  "theme": "light",
+  // "addClassNames": true,
+  // "legend":{
+  //   "position":"right",
+  //   "marginRight":100,
+  //   "autoMargins":false
+  // },
+  // "innerRadius": "30%",
+  // "defs": {
+  //   "filter": [{
+  //     "id": "shadow",
+  //     "width": "200%",
+  //     "height": "200%",
+  //     "feOffset": {
+  //       "result": "offOut",
+  //       "in": "SourceAlpha",
+  //       "dx": 0,
+  //       "dy": 0
+  //     }
+  //   }]
+  // },
       dataProvider: reportData,
       valueField: 'count',
       titleField: 'BwBuild',
+      // dataProvider: [
+      //   {
+      //     country: 'Lithuania',
+      //     litres: 501.9,
+      //     url: 'tables/'
+      //   },
+      //   {
+      //     country: 'Czech Republic',
+      //     litres: 301.9
+      //   },
+      //   {
+      //     country: 'Ireland',
+      //     litres: 201.1
+      //   },
+      //   {
+      //     country: 'Germany',
+      //     litres: 165.8
+      //   },
+      //   {
+      //     country: 'Australia',
+      //     litres: 139.9
+      //   },
+      //   {
+      //     country: 'Austria',
+      //     litres: 128.3
+      //   },
+      //   {
+      //     country: 'UK',
+      //     litres: 99
+      //   },
+      //   {
+      //     country: 'Belgium',
+      //     litres: 60
+      //   }
+      // ],
+      // valueField: 'litres',
+      // titleField: 'country',
       export: {
         enabled: true
       },
       creditsPosition: 'bottom-left',
 
-      autoMargins: false,
-      marginTop: 10,
+      autoMargins: true,
+      marginTop: 0,
       alpha: 0.8,
       marginBottom: 0,
       marginLeft: 0,
@@ -76,7 +139,7 @@
             maxWidth: 900,
             overrides: {
               legend: {
-                enabled: false
+                enabled: true
               }
             }
           },
@@ -86,7 +149,7 @@
             maxWidth: 200,
             overrides: {
               valueAxes: {
-                labelsEnabled: false
+                labelsEnabled: true
               },
               marginTop: 30,
               marginBottom: 30,
@@ -97,6 +160,18 @@
         ]
       }
     });
+
+//     pieChart.addListener('rendered', function(event) {
+//   // populate our custom legend when chart renders
+//   pieChart.customLegend = document.getElementById('legend');
+//   for (var i in pieChart.chartData) {
+//     var row = pieChart.chartData[i];
+//     var color = pieChart.colors[i];
+//     var percent = Math.round(row.percents * 100) / 100;
+//     var value = row.value;
+//     legend.innerHTML += '<div class="legend-item" id="legend-item-' + i + '" onclick="toggleSlice(' + i + ');" onmouseover="hoverSlice(' + i + ');" onmouseout="blurSlice(' + i + ');" style="color: ' + color + ';"><div class="legend-marker" style="background: ' + color + '"></div>' + row.title + '<div class="legend-value">' + value + ' | ' + percent + '%</div></div>';
+//   }
+// });
 
     pieChart.addListener('init', handleInit);
 
@@ -112,6 +187,20 @@
       var wedge = e.dataItem.wedge.node;
       wedge.parentNode.appendChild(wedge);
     }
+
+    pieChart.addListener('clickSlice', handleSliceLink);
+
+    // pieChart.addListener('clickL', handleSliceLink);
+
+    function handleSliceLink(e) {
+      location.href='\#/tables/basic';
+      // TODO: Pass in data to show table
+    }
+
+    function handleLegendClick(graph) {
+      location.href='\#/tables/basic';
+    }
+
     });
   }
 
