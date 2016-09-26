@@ -9,9 +9,9 @@
   .controller('PieChartCtrl', PieChartCtrl1);
 
   /** @ngInject */
-  function PieChartCtrl1($element, ReportService,layoutPaths, baConfig) {
+  function PieChartCtrl1($element, $location, $scope, ReportService, ResultService,layoutPaths, baConfig) {
     ReportService.then(function(response){ 
-    var reportData = response;
+    var reportData = response.pieChartData;
     var layoutColors = baConfig.colors;
     var id = $element[0].getAttribute('id');
     var pieChart = AmCharts.makeChart(id, {
@@ -55,69 +55,9 @@
           }
         ]
       },
-  //       "type": "pie",
-  // "startDuration": 0,
-  //  "theme": "light",
-  // "addClassNames": true,
-  // "legend":{
-  //   "position":"right",
-  //   "marginRight":100,
-  //   "autoMargins":false
-  // },
-  // "innerRadius": "30%",
-  // "defs": {
-  //   "filter": [{
-  //     "id": "shadow",
-  //     "width": "200%",
-  //     "height": "200%",
-  //     "feOffset": {
-  //       "result": "offOut",
-  //       "in": "SourceAlpha",
-  //       "dx": 0,
-  //       "dy": 0
-  //     }
-  //   }]
-  // },
       dataProvider: reportData,
       valueField: 'count',
-      titleField: 'BwBuild',
-      // dataProvider: [
-      //   {
-      //     country: 'Lithuania',
-      //     litres: 501.9,
-      //     url: 'tables/'
-      //   },
-      //   {
-      //     country: 'Czech Republic',
-      //     litres: 301.9
-      //   },
-      //   {
-      //     country: 'Ireland',
-      //     litres: 201.1
-      //   },
-      //   {
-      //     country: 'Germany',
-      //     litres: 165.8
-      //   },
-      //   {
-      //     country: 'Australia',
-      //     litres: 139.9
-      //   },
-      //   {
-      //     country: 'Austria',
-      //     litres: 128.3
-      //   },
-      //   {
-      //     country: 'UK',
-      //     litres: 99
-      //   },
-      //   {
-      //     country: 'Belgium',
-      //     litres: 60
-      //   }
-      // ],
-      // valueField: 'litres',
-      // titleField: 'country',
+      titleField: 'name',
       export: {
         enabled: true
       },
@@ -161,17 +101,6 @@
       }
     });
 
-//     pieChart.addListener('rendered', function(event) {
-//   // populate our custom legend when chart renders
-//   pieChart.customLegend = document.getElementById('legend');
-//   for (var i in pieChart.chartData) {
-//     var row = pieChart.chartData[i];
-//     var color = pieChart.colors[i];
-//     var percent = Math.round(row.percents * 100) / 100;
-//     var value = row.value;
-//     legend.innerHTML += '<div class="legend-item" id="legend-item-' + i + '" onclick="toggleSlice(' + i + ');" onmouseover="hoverSlice(' + i + ');" onmouseout="blurSlice(' + i + ');" style="color: ' + color + ';"><div class="legend-marker" style="background: ' + color + '"></div>' + row.title + '<div class="legend-value">' + value + ' | ' + percent + '%</div></div>';
-//   }
-// });
 
     pieChart.addListener('init', handleInit);
 
@@ -193,12 +122,31 @@
     // pieChart.addListener('clickL', handleSliceLink);
 
     function handleSliceLink(e) {
-      location.href='\#/tables/basic';
+      var selectedData = e.dataItem.dataContext;
+      var query = 
+      {
+        buildName: response.buildName,
+        name: selectedData.name
+      };
+
+      //post to backend interface
+      $scope.$apply(function(){
+
+        // console.log(query);
+        $location.path('/tables/smart');
+      });
+      
       // TODO: Pass in data to show table
+      //service.then()
+      // ResultService.then(function(response){
+
+      // });
     }
 
     function handleLegendClick(graph) {
-      location.href='\#/tables/basic';
+      $scope.$apply(function(){
+        $location.path('/tables/smart');
+      });
     }
 
     });

@@ -15,7 +15,7 @@
           url: '/tables',
           template : '<ui-view></ui-view>',
           abstract: true,
-          controller: 'TablesPageCtrl',
+          // controller: 'TablesPageCtrl',
           title: 'Tables',
           sidebarMeta: {
             icon: 'ion-grid',
